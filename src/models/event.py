@@ -29,4 +29,4 @@ class Event(Base):
     contact_id: Mapped[int] = mapped_column(ForeignKey('contacts.id'))
     type : Mapped[EventType] = mapped_column(EnumSQL(EventType)) 
     date: Mapped[Date] = mapped_column()
-    template: Mapped[str] = mapped_column()
+    template: Mapped[str] = mapped_column(nullable=True)
