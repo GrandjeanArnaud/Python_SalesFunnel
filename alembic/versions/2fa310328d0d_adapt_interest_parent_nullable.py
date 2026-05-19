@@ -24,7 +24,8 @@ def upgrade() -> None:
     op.alter_column('interests', 'parent',
                existing_type=sa.VARCHAR(),
                type_=sa.Integer(),
-               nullable=True)
+               nullable=True,
+               postgresql_using="parent::integer")
     # ### end Alembic commands ###
 
 
