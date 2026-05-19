@@ -4,21 +4,21 @@ INSERT INTO sectors (id, code, label) VALUES
 (3, 'barber', 'Barber'),
 (4, 'spa', 'Spa');
 
-INSERT INTO contacts (id, name, last_name, first_name, email, sector_id, interests) 
+INSERT INTO contacts (id, name, last_name, first_name, email, interests, sector_id ) 
 VALUES
-( 1, 'Salon Élégance', 'Dupont', 'Alex', 'alex@salon.be', 1, '{}' ),
-( 2, 'Beauty Glow', 'Martin', 'Sophie', 'sophie@beauty.be', 2, '{}' ),
-( 3, 'Barber House', 'Bernard', 'Luc', 'luc@barber.be', 3, '{}' ),
-( 4, 'Zen Spa Center', 'Leroy', 'Emma', 'emma@spa.be', 4, '{}' ),
-( 5, 'Modern Cut Studio', 'Durand', 'Tom', 'tom@salon.be', 1, '{}' ),
-( 6, 'Pure Beauty Lounge', 'Moreau', 'Nina', 'nina@beauty.be', 2, '{}' ),
-( 7, 'Prestige Coiffure', 'Lambert', 'Pierre', 'pierre@salon.be', 1, '{}' ),
-( 8, 'Relax Spa Retreat', 'Robert', 'Lea', 'lea@spa.be', 4, '{}' ), 
-( 9, 'Classic Barber Club', 'Girard', 'Mike', 'mike@barber.be', 3, '{}' ),
-( 10, 'Beauty Harmony', 'Fournier', 'Anna', 'anna@beauty.be', 2, '{}' );
+( 1, 'Salon Élégance', 'Dupont', 'Alex', 'alex@salon.be', '{}', 1),
+( 2, 'Beauty Glow', 'Martin', 'Sophie', 'sophie@beauty.be', '{}', 2),
+( 3, 'Barber House', 'Bernard', 'Luc', 'luc@barber.be', '{}', 3),
+( 4, 'Zen Spa Center', 'Leroy', 'Emma', 'emma@spa.be', '{}', 4),
+( 5, 'Modern Cut Studio', 'Durand', 'Tom', 'tom@salon.be', '{}', 1),
+( 6, 'Pure Beauty Lounge', 'Moreau', 'Nina', 'nina@beauty.be', '{}', 2),
+( 7, 'Prestige Coiffure', 'Lambert', 'Pierre', 'pierre@salon.be', '{}', 1),
+( 8, 'Relax Spa Retreat', 'Robert', 'Lea', 'lea@spa.be', '{}', 4), 
+( 9, 'Classic Barber Club', 'Girard', 'Mike', 'mike@barber.be', '{}', 3),
+( 10, 'Beauty Harmony', 'Fournier', 'Anna', 'anna@beauty.be', '{}', 2);
 
 
-INSERT INTO interests (id, name, parent_id) VALUES
+INSERT INTO interests (id, name, parent) VALUES
 
 -- HAIR SALON & BARBER
 (1,'hair_care',NULL),
@@ -76,4 +76,4 @@ INSERT INTO interest_sectors (interest_id, sector_id) VALUES
 -- Spa
 (20,4),(21,4),(22,4),(23,4),(24,4),(25,4),(26,4),(27,4),(28,4),
 -- Beauty salon
-(30,2),(31,2),(32,2),(33,2),(34,2),(35,2),(36,2),(37,2),(38,2),(39,2),(40,2),(41,2),
+(30,2),(31,2),(32,2),(33,2),(34,2),(35,2),(36,2),(37,2),(38,2),(39,2),(40,2),(41,2);
