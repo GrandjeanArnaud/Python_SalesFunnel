@@ -8,6 +8,6 @@ class Interest(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, init=False, unique=True)
     name: Mapped[str] = mapped_column(unique=True)
-    parent: Mapped[str] = mapped_column()
+    parent: Mapped[int] = mapped_column(nullable=True)
 
     
