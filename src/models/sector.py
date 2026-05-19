@@ -7,6 +7,6 @@ class Sector(Base):
     __tablename__ = 'sectors'
 
     id: Mapped[int] = mapped_column(primary_key=True, init=False, unique=True)
-    code: Mapped[str] = mapped_column(unique=True, notnull=True)
-    label: Mapped[str] = mapped_column(notnull=True)
+    code: Mapped[str] = mapped_column(unique=True, nullable=False)
+    label: Mapped[str] = mapped_column(nullable=False)
 

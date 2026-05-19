@@ -1,7 +1,8 @@
 
 from __future__ import annotations
+from datetime import datetime
 from models.database import Base
-from sqlalchemy import Date, ForeignKey
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 import enum
@@ -28,5 +29,5 @@ class Event(Base):
     id: Mapped[int] = mapped_column(primary_key=True, init=False, unique=True)
     contact_id: Mapped[int] = mapped_column(ForeignKey('contacts.id'))
     type : Mapped[EventType] = mapped_column(EnumSQL(EventType)) 
-    date: Mapped[Date] = mapped_column()
+    date: Mapped[datetime] = mapped_column()
     template: Mapped[str] = mapped_column(nullable=True)
