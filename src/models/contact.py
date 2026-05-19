@@ -1,6 +1,6 @@
 from __future__ import annotations
 from models.database import Base
-from sqlalchemy import JSON
+from sqlalchemy import JSON, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 
 class Contact(Base):
@@ -13,4 +13,4 @@ class Contact(Base):
     email: Mapped[str] = mapped_column(unique=True)
     interests: Mapped[JSON] = mapped_column(type_=JSON)
     
-    sector: Mapped[int] = mapped_column()
+    sector_id: Mapped[int] = mapped_column(ForeignKey('sectors.id'))
