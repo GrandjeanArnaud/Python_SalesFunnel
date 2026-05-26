@@ -62,7 +62,7 @@ class InterestRepository():
         
         roots: list[Interest] = []
 
-        # Remplid les dict
+        # Remplissage des dict
         for item in interests:
             by_name[item.name] = item
             by_id[item.id] = item
@@ -75,7 +75,82 @@ class InterestRepository():
         return by_name, by_id, children, roots
 
 
-    def get_prioritized_interests(self, user_json, interests_du_secteur) :
+    def _compute_propagated_scores(
+        self, 
+        user_interests_dict: dict[str, float], 
+        by_name: dict[str, Interest], 
+        children: dict[int, list[Interest]]
+        ) -> dict[str, float]:
+        """Calcule les scores initiaux et propage les bonus aux enfants et aux frères."""
+        result_scores = {}
+
+        # Initialisation des scores explicites
+        for name, score in user_interests_dict.items():
+            if name in by_name:
+                result_scores[name] = score
+
+        # Propagation des bonus
+        for name, score in user_interests_dict.items():
+            if name not in by_name:
+                continue
+                
+            node = by_name[name]
+            
+            # Depuis parent vers enfants (50% de la force, max 0.2)
+            for c in children.get(node.id, []):
+                bonus_parent = min(score * 0.5, 0.2)
+                result_scores[c.name] = result_scores.get(c.name, 0.0) + bonus_parent
+
+            # Depuis siblings (20% de la force, max 0.1)
+            if node.parent is not None:
+                for s in children.get(node.parent, []):
+                    if s.id != node.id:
+                        bonus_sibling = min(score * 0.2, 0.1)
+                        result_scores[s.name] = result_scores.get(s.name, 0.0) + bonus_sibling
+
+        # Remise à 1.0 si score dépassant
+        for name in result_scores:
+            result_scores[name] = min(result_scores[name], 1.0)
+
+        return result_scores
+
+    def _sort_and_filter_interests(
+        self, 
+        result_scores: dict[str, float], 
+        by_name: dict[str, Interest], 
+        roots: list[Interest]
+        ) -> list[Interest]:
+        """Filtre les intérêts pour exclure les roots, puis les trie par score décroissant."""
+        root_names = {r.name for r in roots}
+
+        # Récupère uniquement les objets non-roots présents dans les scores
+        matched_interest_objects = [
+            by_name[name] for name in result_scores.keys() 
+            if name not in root_names
+        ]
+
+        # Tri décroissant sur le score, puis alphabétique sur le nom
+        return sorted(
+            matched_interest_objects, 
+            key=lambda interest: (-result_scores[interest.name], interest.name)
+        )
+
+
+    def get_prioritized_interests(self, user_json, interests_du_secteur):
+        """
+        Calcule les scores cumulés et plafonnés des intérêts d'un contact 
+        en fonction des relations de parenté et d'un dictionnaire de scores initiaux.
+        Retourne la liste des objets intérêts non-roots triés, ainsi que la liste des roots.
+        """
+        user_interests_dict = self.extract_interests_from_json(user_json)
+        by_name, _, children, roots = self.build_indexes(interests_du_secteur)
+
+        result_scores = self._compute_propagated_scores(user_interests_dict, by_name, children)
+
+        sorted_non_roots = self._sort_and_filter_interests(result_scores, by_name, roots)
+
+        return sorted_non_roots, roots
+
         """
         Calcule les scores cumulés et plafonnés des intérêts d'un contact 
         en fonction des relations de parenté et d'un dictionnaire de scores initiaux.
