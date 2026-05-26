@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="fr"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vos Intérêts</title></head><body style="margin: 0; padding: 0; background-color: #f9fafb; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
+
+    <!-- Conteneur Principal -->
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f9fafb; padding: 20px 0;">
+        <tr>
+            <td align="center">
+                
+                <!-- Carte du Mail -->
+                <table role="presentation" width="100%" max-width="600" cellspacing="0" cellpadding="0" border="0" style="max-width: 600px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); overflow: hidden; border: 1px solid #e5e7eb;">
+                    
+                    <!-- Header -->
+                    <tr>
+                        <td style="background-color: #4f46e5; padding: 40px 30px; text-align: center;">
+                            <h1 style="margin: 0; color: #ffffff; font-size: 26px; font-weight: 700; letter-spacing: -0.5px;">
+                                Bonjour Pierre Lambert !
+                            </h1>
+                        </td>
+                    </tr>
+
+                    <!-- Corps du message -->
+                    <tr>
+                        <td style="padding: 30px; background-color: #ffffff;">
+                            <p style="margin: 0 0 24px 0; color: #4b5563; font-size: 16px; line-height: 1.6; text-align: center;">
+                                Nous avons sélectionné ces sujets spécialement pour vous. Cliquez sur les centres d'intérêt qui vous inspirent pour en savoir plus :
+                            </p>
+
+                            {% if interests | length > 0 %}
+                                <!-- Boucle des Intérêts (Verticaux) -->
+                                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                    
+                                    {% for item in interests %}
+                                    <tr>
+                                        <td align="center" style="padding-bottom: 16px;">
+                                            <!-- Faux bouton fait en tableau (100% compatible et cliquable) -->
+                                            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                                <tr>
+                                                    <td align="center" style="border-radius: 6px; background-color: #4f46e5;">
+                                                        <a href="http://127.0.0.1:8000/interest?contact_id={{ contact.id }}&interest_id={{ item.id }}" 
+                                                        target="_blank" 
+                                                        style="border: 1px solid #4f46e5; border-radius: 6px; color: #ffffff; display: inline-block; font-size: 15px; font-weight: 600; padding: 12px 24px; text-decoration: none; width: auto; min-width: 200px; text-align: center;">
+                                                            Découvrir {{ item.name }}
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}    
+                                    
+                                </table>
+
+                                <!-- Séparateur visuel subtil -->
+                                <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 32px 0 24px 0;">
+
+                                <!-- NOUVEAU PARAGRAPHE : Catégories Générales -->
+                                <p style="margin: 0 0 20px 0; color: #4b5563; font-size: 16px; line-height: 1.6; text-align: center; font-weight: 600;">
+                                    Ou explorez nos grandes catégories :
+                                </p>
+                            {% endif %}
+                            <!-- Boutons Horizontaux (Catégories de base) -->
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                <tr>
+                                    <td align="center">
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                            <tr>
+
+                                                {% for item in roots %}
+                                                    <td style="padding: 0 8px 8px 8px;">
+                                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                                            <tr>
+                                                                <td align="center" style="border-radius: 6px; background-color: #10b981;">
+                                                                    <a href="http://127.0.0.1:8000/interest?contact_id={{ contact.id }}&interest_id={{ item.id }}" 
+                                                                    target="_blank" 
+                                                                    style="border: 1px solid #10b981; border-radius: 6px; color: #ffffff; display: inline-block; font-size: 14px; font-weight: 600; padding: 10px 20px; text-decoration: none; width: auto; text-align: center; white-space: nowrap;">
+                                                                        {{ item.name }}
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                {% endfor %} 
+
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="padding: 20px 30px; background-color: #f3f4f6; text-align: center; border-top: 1px solid #e5e7eb;">
+                            <p style="margin: 0; color: #9ca3af; font-size: 12px; line-height: 1.5;">
+                                Cet e-mail vous a été envoyé automatiquement selon vos préférences.<br>
+                                © 2026 Sales_funnel. Tous droits réservés.
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </td>
+        </tr>
+    </table></body></html>

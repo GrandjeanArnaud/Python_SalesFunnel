@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page de démonstration</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f6f7fb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #111827;
+    }
+
+    .card {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        max-width: 650px;
+        text-align: center;
+    }
+
+    .badge {
+        display: inline-block;
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 15px;
+        color: #4b5563;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .section {
+        background: #f9fafb;
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 15px;
+        text-align: left;
+    }
+
+    ul {
+        margin: 10px 0 0 20px;
+        color: #374151;
+    }
+
+    .footer {
+        margin-top: 20px;
+        font-size: 12px;
+        color: #9ca3af;
+    }
+
+    .highlight {
+        color: #4f46e5;
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="badge">PAGE DE DÉMONSTRATION</div>
+
+    <h1>Page d’intérêts pour {{ selected_interest }}</h1>
+
+ 
+
+	<div class="section">
+        <strong>Redirection </strong>
+        <p>
+			Cette page est actuellement utilisée dans le cadre d’une démonstration fonctionnelle du système de recommandation.
+		</p><p>
+			Elle sera remplacée par la page du site e-commerce correspondant au choix de l'utilisateur fait dans son mail.
+		</p>
+    </div>
+
+</div>
+
+</body>
+</html>
