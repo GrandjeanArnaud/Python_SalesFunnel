@@ -9,6 +9,13 @@ from src.models.db import Base
 class Contact(Base):
     __tablename__ = 'contacts'
 
+    """Model representing a contact (person/company).
+
+    The `interests` column stores a mapping from interest name to a floating
+    score between 0.0 and 1.0. It is a mutable JSON column so in-place updates
+    are tracked by SQLAlchemy.
+    """
+
     id: Mapped[int] = mapped_column(primary_key=True, init=False, unique=True)
     name: Mapped[str] = mapped_column(unique=True)
     last_name: Mapped[str] = mapped_column()
@@ -22,8 +29,10 @@ class Contact(Base):
 
     @property
     def full_name(self) -> str:
+        """Return the `first_name` and `last_name` combined as a single string."""
         return f"{self.first_name} {self.last_name}"
     
     @property
     def company_and_full_name(self) -> str:
+        """Return a combined display string including company and the contact's full name."""
         return f"{self.name} - {self.full_name}"

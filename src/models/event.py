@@ -9,6 +9,7 @@ import enum
 from sqlalchemy import Enum as EnumSQL
 
 class EventType(enum.Enum):
+    """Enumeration of application event types stored in the `events` table."""
     EMAIL_SENT = "Email_sent"
     EMAIL_DELIVERED = "Email_delivered"
     EMAIL_OPENED = "Email_opened"
@@ -25,6 +26,8 @@ class EventType(enum.Enum):
 
 class Event(Base):
     __tablename__ = 'events'
+
+    """Model representing an event related to a `Contact` (email sent, click...)."""
 
     id: Mapped[int] = mapped_column(primary_key=True, init=False, unique=True)
     contact_id: Mapped[int] = mapped_column(ForeignKey('contacts.id'))
