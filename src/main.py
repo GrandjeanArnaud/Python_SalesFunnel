@@ -1,13 +1,15 @@
-from datetime import datetime
+"""Application entrypoint wiring FastAPI routers.
+
+This module creates the FastAPI `app` and includes routers defined in
+`src.controllers`. It intentionally keeps startup logic minimal so tests
+can import `app` without side-effects.
+"""
+
 from src import controllers
-from fastapi.templating import Jinja2Templates
 from fastapi import FastAPI
 
 app = FastAPI()
 
-# template = Jinja2Templates(directory='src/templates')
-
+# Register routers defined under src.controllers
 app.include_router(controllers.interest_router)
 app.include_router(controllers.workflow_router)
-
-print("Routers added to the FastAPI application.")
