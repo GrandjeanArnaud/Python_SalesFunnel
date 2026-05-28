@@ -24,7 +24,7 @@ class Contact(Base):
     sector_id: Mapped[int] = mapped_column(ForeignKey('sectors.id'))
     interests: Mapped[dict] = mapped_column(
         MutableDict.as_mutable(JSON),
-        default=dict
+        default_factory=dict
     )
 
     @property
